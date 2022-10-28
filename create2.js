@@ -2,10 +2,9 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');//
 
 let schema = `
-create table player(
+create table team(
   id integer primary key, 
-  player_name text,
-  team_id integer
+  team_name text
 );
 `//テーブルを増やすときは新しいファイルを作る
 
