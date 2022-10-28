@@ -12,7 +12,7 @@ db.serialize( () => {
 			return;
 		}
 		for( let data of row ) {
-			console.log( data.id + ' : ' + data.player_name );
+			console.log( data.id + ' : ' + data.player_name + ' : ' + data.team_id);
 		}
 	});
 });
