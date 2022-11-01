@@ -2,15 +2,17 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
 let sql = `
-insert into team("team_name",team_id) values("hiroshimatoyo", 3);
+select *  from team;
 `
 
 db.serialize( () => {
-	db.run( sql, (error, row) => {
+	db.all( sql, (error, row) => {
 		if(error) {
 			console.log('Error: ', error );
 			return;
 		}
-		console.log( "データを追加しました" );
+		for( let data of row ) {
+			console.log( data.id + ' : ' + data.team_name + ' : ' + data.team_id);
+		}
 	});
 });

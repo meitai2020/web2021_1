@@ -4,7 +4,8 @@ const db = new sqlite3.Database('test2.db');//
 let schema = `
 create table team(
   id integer primary key, 
-  team_name text
+  team_name text,
+  team_id integer
 );
 `//テーブルを増やすときは新しいファイルを作る
 
