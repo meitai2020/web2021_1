@@ -14,10 +14,23 @@ app.get("/", (req, res) => {
   const message = "Hello world";
   res.render('p_show', {mes:message});
 })
-
-app.get("/player",(req, res) => {
+app.get("/player", (req, res) => {
+    //console.log(req.query.pop);    // ①
+    let sql = "select id, player.id, player.player_name, team.team_name as name2 from player inner join team on player.team_id=team.team_id;";
+    //console.log(sql);    // ②
+    db.serialize( () => {
+        db.all(sql, (error, data) => {
+            if( error ) {
+                res.render('p_show', {mes:"エラーです"});
+            }
+            //console.log(data);    // ③
+            res.render('p_select', {data:data});
+        })
+    })
+})
+app.get("/playe",(req, res) => {
   const message = "Hello world!!";
-  res.render('show', {mes:message});
+  res.render('p_show', {mes:message});
   db.serialize( () => {
         db.all("select id, player.id, player.player_name, team.team_name as name2 from player inner join team on player.team_id=team.team_id;", (error, row) => {
             if( error ) {
