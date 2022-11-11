@@ -41,6 +41,16 @@ app.get("/db", (req, res) => {
   
 
 });//
+app.get("/db/:id", (req, res) => {
+db.serialize( () => {
+db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
+if( error ) {
+res.render('p_show', {mes:"エラーです"});
+}
+res.render('p_seiseki', {data:row});
+})
+})
+})
   
 
 
