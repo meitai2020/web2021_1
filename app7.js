@@ -28,18 +28,6 @@ app.get("/player", (req, res) => {
         })
     })
 })
-app.get("/playe",(req, res) => {
-  const message = "Hello world!!";
-  res.render('p_show', {mes:message});
-  db.serialize( () => {
-        db.all("select  player.id, player.player_name, team.team_name as name2 from player inner join team on player.team_id=team.team_id;", (error, row) => {
-            if( error ) {
-                res.render('p_show', {mes:"エラーです"});
-            }
-            res.render('p_select', {data:row});
-        })
-});
-});
 
 app.get("/db", (req, res) => {
     db.serialize( () => {
