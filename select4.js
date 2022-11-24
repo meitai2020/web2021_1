@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
 let sql = `
-select *  from seiseki2;
+select player.id, player.player_name, dasuu, hit, average, homerun, daten, seiseki_id from player inner join seiseki2 on player.id = seiseki2.seiseki_id;
 `
 
 db.serialize( () => {
@@ -12,7 +12,7 @@ db.serialize( () => {
 			return;
 		}
 		for( let data of row ) {
-			console.log( data.id + ' : ' + data.dasuu + ' : ' + data.hit + ' : '  + data.average + ' : ' + data.homerun + ' : ' + data.daten + ' : ' + data.seiseki_id );
+			console.log( data.id + ' : ' + data.player_name + ' : ' + data.dasuu + ' : ' + data.hit + ' : '  + data.average + ' : ' + data.homerun + ' : ' + data.daten + ' : ' + data.seiseki_id );
 		}
 	});
 });
