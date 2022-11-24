@@ -8,17 +8,15 @@
   <h2>選手成績</h2>
   <table>
       <% for( let row of data ) { %>
-        <tr>
-            <td><%= row.id %></td>
-            <td><%= row.player_name%></td>
-            <td><%= row.dasuu %></td>
-            <td><%= row.hit %></td>
-            <td><%= row.average %></td>
-            <td><%= row.homerun %></td>
-            <td><%= row.daten %></td>
-
-            
-        </tr>
+      <tr>
+        <td><%= row.id %></td>
+        <td><%= row.player_name%</td>
+        <td><%= row.dasuu %></td>
+        <td><%= row.hit %></td>
+        <td><%= row.average %></td>
+        <td><%= row.homerun %></td>
+        <td><%= row.daten %></td>
+      </tr>
       <% } %>
   </table>
 </body>

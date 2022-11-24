@@ -10,6 +10,7 @@ app.use("/public", express.static(__dirname + "/public"));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+
 app.get("/", (req, res) => {
   const message = "Hello world";
   res.render('p_show', {mes:message});
