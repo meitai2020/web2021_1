@@ -42,6 +42,34 @@ app.get("/db", (req, res) => {
   
 
 });//
+
+app.get("/team", (req, res) => {
+    db.serialize( () => {
+        db.all("select team_id, team_name from team;", (error, row) => {
+            if( error ) {
+                res.render('p_show', {mes:"エラーです"});
+            }
+            res.render('t_itirann', {data:row});
+        })
+});
+      
+    
+});
+        
+
+app.get("/t_db/:name", (req, res) => {
+    db.serialize( () => {
+        db.all("select id, player_name from player where team_id=" + req.params.id + ";", (error, row) => {
+            if( error ) {
+                res.render('p_show', {mes:"エラーです"});
+            }
+            res.render('p_select', {data:row});
+        })
+});
+  
+
+});
+
 app.get("/db/:id", (req, res) => {
 db.serialize( () => {
 db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
