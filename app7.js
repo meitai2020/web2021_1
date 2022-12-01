@@ -71,6 +71,7 @@ app.get("/t_db/:name", (req, res) => {
 });
 
 app.get("/db/:id", (req, res) => {
+  //console.log(req.params.id);
 db.serialize( () => {
 db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
 if( error ) {
@@ -79,10 +80,35 @@ res.render('p_show', {mes:"エラーです"});
 res.render('p_seiseki', {data:row});
 })
 })
+});
+app.get("/all", (req, res) => {
+  //console.log(req.params.id);
+db.serialize( () => {
+db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id ;", (error, row) => {
+if( error ) {
+res.render('p_show', {mes:"エラーです"});
+}
+res.render('p_seiseki', {data:row});
 })
-  
+})
+});
 
-
+app.post("/insert", (req, res) => {
+let sql = `
+insert into player (player_name,team_id) values (` + req.body.name + `,` + req.body.id + `);
+`
+console.log(sql);
+db.serialize( () => {
+db.run( sql, (error, row) => {
+console.log(error);
+if(error) {
+res.render('p_show', {mes:"エラーです"});
+}
+res.render('p_show', {mes:"成功です"});
+});
+});
+console.log(req.body);
+});
 
 app.use(function(req, res, next) {
   res.status(404).send('ページが見つかりません');
