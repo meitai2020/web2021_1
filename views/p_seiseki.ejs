@@ -6,7 +6,14 @@
 </head>
 <body>
   <h2>選手成績</h2>
-  <table>
+  <table border = 1>
+    <th>ID</th>
+    <th>名前</th>
+    <th>打数</th>
+    <th>安打数</th>
+    <th>打率</th>
+    <th>本塁打</th>
+    <th>打点</th>
       <% for( let row of data ) { %>
       <tr>
         <td><%= row.id %></td>

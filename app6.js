@@ -11,7 +11,16 @@ app.get("/", (req, res) => {
   const message = "Hello world";
   res.render('show', {mes:message});
 });
-
+app.get("/db/:id", (req, res) => {
+db.serialize( () => {
+db.all("select id, 都道府県, 人口, 大学 from example where id=" + req.params.id + ";", (error, row) => {
+if( error ) {
+res.render('show', {mes:"エラー"});
+}
+res.render('db', {data:row});
+})f
+})
+})
 app.get("/db", (req, res) => {
     db.serialize( () => {
         db.all("select id, 都道府県, 人口 from example;", (error, row) => {
