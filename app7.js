@@ -70,8 +70,8 @@ app.get("/t_db/:name", (req, res) => {
 
 });
 
-app.get("/db/:id", (req, res) => {
-  //console.log(req.params.id);
+app.get("/db/id/:id", (req, res) => {
+  console.log(req.params.id);
 db.serialize( () => {
 db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
 if( error ) {
