@@ -57,7 +57,7 @@ app.get("/team", (req, res) => {
 });
         
 
-app.get("/t_db/:name", (req, res) => {
+app.get("/t_db/:id", (req, res) => {
     db.serialize( () => {
         db.all("select id, player_name from player where team_id=" + req.params.id + ";", (error, row) => {
             if( error ) {

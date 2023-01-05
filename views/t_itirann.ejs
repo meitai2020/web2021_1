@@ -9,8 +9,8 @@
   <table>
       <% for( let row of data ) { %>
         <tr>
-            <td><a href="/t_db/:name"><%= row.team_id %></a><br></td>
-            <td><a href="/t_db/:name"><%= row.team_name %></a></td>
+            <td><a href="/t_db/<%= row.team_id %>"><%= row.team_id %></a><br></td>
+            <td><%= row.team_name %></td>
         </tr>
       <% } %>
   </table>
