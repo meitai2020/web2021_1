@@ -5,11 +5,11 @@
   <title>入力ページ</title>
 </head>
 <body>
-  <form action="/insert">
-    <input type="text" name="desc" id="desc">
-    <label for="desc">名前</label>
-    <input type="number" name="pop" id="team-id">
-    <label for="team-id">チームID</label>
+  <form action="/insert" method="post">
+    <input type="text" name="name">
+    <label for="name">名前</label>
+    <input type="number" name="team_id">
+    <label for="team_id">チームID</label>
     <input type="submit" value="送信">
   </form>
 </body>

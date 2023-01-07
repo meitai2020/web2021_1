@@ -95,7 +95,7 @@ res.render('p_seiseki', {data:row});
 
 app.post("/insert", (req, res) => {
 let sql = `
-insert into player (player_name,team_id) values (` + req.body.name + `,` + req.body.id + `);
+insert into player (player_name,team_id) values ("` + req.body.name + `",` + req.body.team_id + `);
 `
 console.log(sql);
 db.serialize( () => {
