@@ -73,7 +73,7 @@ app.get("/t_db/:id", (req, res) => {
 app.get("/db/id/:id", (req, res) => {
   console.log(req.params.id);
 db.serialize( () => {
-db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
+db.all("select player.id, player.player_name, dasuu, hit, round(cast(seiseki2.hit as REAL)/cast(seiseki2.dasuu as REAL) ,3)as ave, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id where player.id=" + req.params.id + ";", (error, row) => {
 if( error ) {
 res.render('p_show', {mes:"エラーです"});
 }
@@ -81,6 +81,7 @@ res.render('p_seiseki', {data:row});
 })
 })
 });
+
 app.get("/all", (req, res) => {
   //console.log(req.params.id);
 db.serialize( () => {
@@ -96,6 +97,7 @@ res.render('p_seiseki', {data:row});
 app.post("/insert", (req, res) => {
 let sql = `
 insert into player (player_name,team_id) values ("` + req.body.name + `",` + req.body.team_id + `);
+insert into seiseki2 (dasuu,hit,homerun,daten,seiseki_id) values (` + req.body.dasuu + `,` + req.body.hit + `,` + req.body.homerun + `,` + req.body.daten + `,` + req.body.seiseki_id + `,);
 `
 console.log(sql);
 db.serialize( () => {
