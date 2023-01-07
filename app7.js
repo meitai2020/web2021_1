@@ -84,7 +84,7 @@ res.render('p_seiseki', {data:row});
 app.get("/all", (req, res) => {
   //console.log(req.params.id);
 db.serialize( () => {
-db.all("select player.id, player.player_name, dasuu, hit, average, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id ;", (error, row) => {
+db.all("select player.id, player.player_name, dasuu, hit, round(cast(seiseki2.hit as REAL)/cast(seiseki2.dasuu as REAL) ,3)as ave, homerun, daten from player inner join seiseki2 on player.id = seiseki2.seiseki_id ;", (error, row) => {
 if( error ) {
 res.render('p_show', {mes:"エラーです"});
 }
