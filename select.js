@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test2.db');
 
 let sql = `
-select *  from player;
+select *  from seiseki2;
 `
 
 db.serialize( () => {
@@ -12,7 +12,7 @@ db.serialize( () => {
 			return;
 		}
 		for( let data of row ) {
-			console.log( data.id + ' : ' + data.player_name + ' : ' + data.team_id);
+			console.log( data.id + ' : ' + data.ave + ' : ' + data.seiseki_id);
 		}
 	});
 });

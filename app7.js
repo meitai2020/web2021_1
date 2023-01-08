@@ -97,7 +97,23 @@ res.render('p_seiseki', {data:row});
 app.post("/insert", (req, res) => {
 let sql = `
 insert into player (player_name,team_id) values ("` + req.body.name + `",` + req.body.team_id + `);
-insert into seiseki2 (dasuu,hit,homerun,daten,seiseki_id) values (` + req.body.dasuu + `,` + req.body.hit + `,` + req.body.homerun + `,` + req.body.daten + `,` + req.body.seiseki_id + `,);
+`
+console.log(sql);
+db.serialize( () => {
+db.run( sql, (error, row) => {
+console.log(error);
+if(error) {
+res.render('p_show', {mes:"エラーです"});
+}
+res.render('p_show', {mes:"成功です"});
+});
+});
+console.log(req.body);
+});
+
+app.post("/insertseiseki", (req, res) => {
+let sql = `
+insert into seiseki2 (dasuu,hit,homerun,daten,seiseki_id) values (` + req.body.dasuu + `,` + req.body.hit + `,` + req.body.homerun + `,` + req.body.daten + `,` + req.body.seiseki_id + `);
 `
 console.log(sql);
 db.serialize( () => {
